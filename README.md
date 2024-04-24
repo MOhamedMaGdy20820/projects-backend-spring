@@ -1,4 +1,4 @@
-# projects-backend-spring
+## projects-backend-spring
 
 ## Training courses
 1. [LEGACY - Spring and Hibernate for Beginners](https://www.udemy.com/share/108hYU3@sI_Loe_CqRBHnQJaTQYYXed12sFRbNmRbrO5uVfvSaGD7hbQz9g_VOCaoRKuTk9M4w==/)
