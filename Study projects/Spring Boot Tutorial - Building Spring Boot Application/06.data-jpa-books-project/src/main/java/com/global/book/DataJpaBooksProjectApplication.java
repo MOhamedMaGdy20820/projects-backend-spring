@@ -8,6 +8,8 @@ public class DataJpaBooksProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DataJpaBooksProjectApplication.class, args);
+
+
 	}
 
 }
