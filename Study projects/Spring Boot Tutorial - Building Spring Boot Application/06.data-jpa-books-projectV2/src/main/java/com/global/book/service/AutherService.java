@@ -9,41 +9,53 @@ import com.global.book.repository.AutherRepo;
 
 @Service
 public class AutherService {
-	
+
 	@Autowired
-	 private AutherRepo autherRepo;
-	
+	private AutherRepo autherRepo;
+
 	public Auther findById(long id) {
-			return autherRepo.findById(id).orElseThrow();
+		return autherRepo.findById(id).orElseThrow();
 	}
-	
+
+//	public Auther getById(long id) {
+//		return autherRepo.getById(id);
+//	}
+
+
 	public List<Auther> findAll() {
 		return autherRepo.findAll();
 	}
-	
-	public Auther insert (Auther auther) {
-		
+
+	public Auther insert(Auther auther) {
+
 //		  if( auther.getId() != null ) {
 //			  throw new RuntimeException();
 //			}
-		  
-		 	return autherRepo.save(auther);
+
+		return autherRepo.save(auther);
 	}
-	
-	public Auther update (Auther auther) {
+
+	public Auther update(Auther auther) {
 		Auther auther2 = findById(auther.getId());
-		
+
 		auther2.setName(auther.getName());
-		
+
 		return autherRepo.save(auther2);
 	}
-	
+
 	public void deleteById(long id) {
-		 autherRepo.deleteById(id);
+		autherRepo.deleteById(id);
 	}
-	
-	
-} 
+
+
+	public List<Auther> insertAll(List<Auther> list) {
+
+		return autherRepo.saveAll(list);
+	}
+
+}
+
+
 
 
 

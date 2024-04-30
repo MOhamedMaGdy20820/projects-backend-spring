@@ -1,14 +1,13 @@
 package com.global.book.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
 
 
+@NamedEntityGraph(name = "loadAuther" , attributeNodes = @NamedAttributeNode("auther"))
 @Entity
 @Table(name = "books")
 public class Book {
@@ -20,10 +19,34 @@ public class Book {
 	private String name;
 	
 	private double price;
-	
-	@ManyToOne
+
+	@Transient
+	private double discounted = 1 - 0.25;
+
+	//@Transient
+	@Formula("(select count(*) from books)")
+	private long bookCount;
+
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	 @JsonBackReference // or  @JsonIgnore
+	// @JsonIgnoreProperties( "hibernateLazyInitializer") // with FetchType.LAZY
 	@JoinColumn(name = "auther_id")
 	private Auther auther;
+
+	public double getDiscounted() {
+		return discounted;
+	}
+
+	public void setDiscounted(double discounted) {
+		this.discounted = discounted;
+	}
+
+	@PostLoad // will work just one time when the object created
+	private void calcDiscounted(){
+		this.setDiscounted(price * discounted);
+	}
 
 	public long getId() {
 		return id;
@@ -57,6 +80,11 @@ public class Book {
 		this.auther = auther;
 	}
 
-	
+	public long getBookCount() {
+		return bookCount;
+	}
 
+	public void setBookCount(long bookCount) {
+		this.bookCount = bookCount;
+	}
 }
