@@ -3,6 +3,7 @@ package com.global.book.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.global.book.base.BaseEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Formula;
 
@@ -10,12 +11,12 @@ import org.hibernate.annotations.Formula;
 @NamedEntityGraph(name = "loadAuther" , attributeNodes = @NamedAttributeNode("auther"))
 @Entity
 @Table(name = "books")
-public class Book {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
+public class Book extends BaseEntity<Long> {
+//
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private long id;
+//
 	private String name;
 	
 	private double price;
@@ -48,13 +49,13 @@ public class Book {
 		this.setDiscounted(price * discounted);
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+//	public long getId() {
+//		return id;
+//	}
+//
+//	public void setId(long id) {
+//		this.id = id;
+//	}
 
 	public String getName() {
 		return name;

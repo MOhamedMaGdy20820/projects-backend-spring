@@ -1,24 +1,23 @@
 package com.global.book.service;
 
 //import com.global.book.base.BaseService;
+import com.global.book.base.BaseService;
 import com.global.book.entity.Book;
 import com.global.book.repository.BookRepo;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 //import javax.persistence.EntityManager;
 //import javax.persistence.ParameterMode;
 //import javax.persistence.StoredProcedureQuery;
 import java.util.List;
-import java.util.Map;
 
 @Service
 //@RequiredArgsConstructor
 //@Log4j2
-public class BookService  {
+public class BookService extends BaseService<Book, Long>  {
 
     @Autowired
 	private  BookRepo bookRepo;
@@ -74,11 +73,49 @@ public class BookService  {
 //    }
 //
 //
-	
-	
-	
+//
+//
+//
+//	public List<Book> insertAll(List<Book> entities) {
+//
+//		return bookRepo.saveAll(entities);
+//	}
+//
+//	public Book update(Book entity) {
+//
+//		Book book = findById(entity.getId());
+//
+//		book.setName(entity.getName());
+//		book.setPrice(entity.getPrice());
+//		book.setAuther(entity.getAuther());
+//
+//		return bookRepo.save(book);
+//	}
+//
+//
+//	public Book findById(long id) {
+//        return bookRepo.findById(id).orElse(null);
+//    }
+//
+//
+
+
+//
+//	public void deleteById(Long id) {
+//		bookRepo.deleteById(id);
+//	}
+//
+//	public List<Book> findAll() {
+//		return bookRepo.findAll();
+//	}
+//
+//	public Book insert(Book book) {
+//		return bookRepo.save(book);
+//	}
+
+
 	public List<Book> insertAll(List<Book> entities) {
-		
+
 		return bookRepo.saveAll(entities);
 	}
 
@@ -87,31 +124,13 @@ public class BookService  {
 		Book book = findById(entity.getId());
 
 		book.setName(entity.getName());
-		book.setPrice(entity.getPrice());
-		book.setAuther(entity.getAuther());
 
-		return bookRepo.save(book);
+		return update(book);
 	}
 
 
-	public Book findById(long id) {
-        return bookRepo.findById(id).orElse(null);
-    }
+	public int deleteByAutherId (Long id) {
 
-
-    public int deleteByAutherId (Long id) {
 		return bookRepo.deleteByAutherId(id);
-	}
-
-	public void deleteById(Long id) {
-		bookRepo.deleteById(id);
-	}
-
-	public List<Book> findAll() {
-		return bookRepo.findAll();
-	}
-
-	public Object insert(Book book) {
-		return bookRepo.save(book);
 	}
 }
