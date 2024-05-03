@@ -21,15 +21,15 @@ public class BookService extends BaseService<Book, Long>  {
 
     @Autowired
 	private  BookRepo bookRepo;
-	
+
     // private final static String USERS_PROC = ".INSERT_JP_USERS";
-   
+
      // private final EntityManager entityManager;
 
     //@Autowired
     // private  Environment env;
-	
-	
+
+
 //    public Book addUsers(Book book) {
 //        String dbName = env.getProperty("spring.jpa.properties.hibernate.default_schema");
 //
@@ -119,18 +119,18 @@ public class BookService extends BaseService<Book, Long>  {
 		return bookRepo.saveAll(entities);
 	}
 
+
 	public Book update(Book entity) {
 
-		Book book = findById(entity.getId());
+		Book book = super.findById(entity.getId());
 
 		book.setName(entity.getName());
 
-		return update(book);
+		return super.update(book);
 	}
 
 
 	public int deleteByAutherId (Long id) {
-
 		return bookRepo.deleteByAutherId(id);
 	}
 }
