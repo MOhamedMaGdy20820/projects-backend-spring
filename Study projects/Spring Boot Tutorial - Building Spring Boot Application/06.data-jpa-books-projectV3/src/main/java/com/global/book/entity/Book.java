@@ -9,6 +9,13 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Where;
+
+
+@NamedStoredProcedureQuery(name = "Book.getBookByAuther",  // stored Procedure (13-4)
+		procedureName = "GET_BOOK_BY_AUTHER", parameters = {
+		@StoredProcedureParameter(mode = ParameterMode.IN, name = "auther_id_in", type = String.class),
+		@StoredProcedureParameter(mode = ParameterMode.OUT, name = "book_count", type = Integer.class)})
 
 
 @NamedEntityGraph(name = "loadAuther" , attributeNodes = @NamedAttributeNode("auther"))

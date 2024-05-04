@@ -2,6 +2,7 @@ package com.global.book.controller;
 
 import java.util.List;
 
+import com.global.book.entity.AutherSearch;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,14 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.global.book.entity.Auther;
 import com.global.book.repository.AutherRepo;
@@ -58,10 +52,19 @@ public class AutherController {
 	
 	@DeleteMapping("/{id}")
 	public void deleteById(@PathVariable long id) {
-		
 		autherService.deleteById(id);
-		
 	}
+
+//	@GetMapping("/spec")
+//	public ResponseEntity<?> findByAutherSpec(@RequestParam String autherSpec) {
+//		return ResponseEntity.ok(autherService.findByAutherSpec(autherSpec));
+//	}
+
+	@PostMapping("/spec")
+	public ResponseEntity<?> findByAutherSpec(@RequestBody AutherSearch autherSearch) {
+		return ResponseEntity.ok(autherService.findByAutherSpec(autherSearch));
+	}
+
 	
 
 }
