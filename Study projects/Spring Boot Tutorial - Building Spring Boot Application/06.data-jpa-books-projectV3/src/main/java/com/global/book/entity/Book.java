@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.global.book.base.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.Formula;
 
 
@@ -12,13 +15,12 @@ import org.hibernate.annotations.Formula;
 @Entity
 @Table(name = "books")
 public class Book extends BaseEntity<Long> {
-//
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private long id;
-//
+
+	@NotNull(message = "Should be enter book name")
 	private String name;
-	
+
+	@Min(value = 5)
+	@Max(value = 1000)
 	private double price;
 
 	@Transient
@@ -29,10 +31,9 @@ public class Book extends BaseEntity<Long> {
 	private long bookCount;
 
 
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	 @JsonBackReference // or  @JsonIgnore
-	// @JsonIgnoreProperties( "hibernateLazyInitializer") // with FetchType.LAZY
+	@NotNull
+	@JsonBackReference // or  @JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "auther_id")
 	private Auther auther;
 
@@ -65,19 +66,19 @@ public class Book extends BaseEntity<Long> {
 		this.price = price;
 	}
 
-	public Auther getAuther() {
-		return auther;
-	}
-
-	public void setAuther(Auther auther) {
-		this.auther = auther;
-	}
-
 	public long getBookCount() {
 		return bookCount;
 	}
 
 	public void setBookCount(long bookCount) {
 		this.bookCount = bookCount;
+	}
+
+	public Auther getAuther() {
+		return auther;
+	}
+
+	public void setAuther(Auther auther) {
+		this.auther = auther;
 	}
 }

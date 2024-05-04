@@ -2,9 +2,13 @@ package com.global.book.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +22,8 @@ import com.global.book.entity.Auther;
 import com.global.book.repository.AutherRepo;
 import com.global.book.service.AutherService;
 
+
+@Validated  // use to tell spring to validate parameters that are passed into method of the annotated class
 @RestController
 @RequestMapping("/auther")
 public class AutherController {
@@ -27,7 +33,7 @@ public class AutherController {
 	
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable long id) {
+	public ResponseEntity<?> findById(@PathVariable @Min(value = 3) @Max(value = 40) long id) {
 		
 		return ResponseEntity.ok(autherService.findById(id));
 	}
@@ -39,13 +45,13 @@ public class AutherController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?>  insert (@RequestBody Auther auther) {
+	public ResponseEntity<?>  insert (@RequestBody @Valid Auther auther) {
 		
 		 return ResponseEntity.ok(autherService.insert(auther));
 	}
 	
 	@PutMapping("")
-	public ResponseEntity<?>  update (@RequestBody Auther auther) {
+	public ResponseEntity<?>  update (@RequestBody @Valid Auther auther) {
 	
 		return ResponseEntity.ok(autherService.update(auther));
 	}

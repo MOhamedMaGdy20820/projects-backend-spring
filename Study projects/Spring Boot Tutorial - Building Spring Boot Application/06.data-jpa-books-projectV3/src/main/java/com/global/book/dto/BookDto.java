@@ -2,13 +2,28 @@ package com.global.book.dto;
 
 
 import com.global.book.entity.Auther;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 //@Builder
 public class BookDto {
 
 	private long id;
+
+	@NotBlank
 	private String name ;
+
+	@Min(value = 5)
+	@Max(value = 1000)
 	private double price;
+
+	@NotNull
+	private Auther auther;
+
+	private double discounted;
+
 	private long bookCount;
 
 	public long getBookCount() {
@@ -19,8 +34,7 @@ public class BookDto {
 		this.bookCount = bookCount;
 	}
 
-	private double discounted ;
-	private Auther auther;
+
 
 	public long getId() {
 		return id;

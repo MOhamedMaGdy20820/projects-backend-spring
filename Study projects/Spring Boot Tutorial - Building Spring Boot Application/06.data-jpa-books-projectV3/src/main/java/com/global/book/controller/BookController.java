@@ -6,6 +6,7 @@ import com.global.book.entity.Book;
 //import com.global.book.mapper.BookMapper;
 import com.global.book.service.BookService;
 //import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,22 @@ public class BookController {
 	private  BookService bookService;
 
 	@PostMapping("")
-	public ResponseEntity<?> insertBook(@RequestBody Book book) {
+	public ResponseEntity<?> insertBook(@RequestBody @Valid BookDto bookDto) {
+
+		Book book = new Book();
+		book.setName(bookDto.getName());
+		book.setPrice(bookDto.getPrice());
+		book.setAuther(bookDto.getAuther());
+
 		return ResponseEntity.ok(bookService.insert(book));
 	}
+
+	@PutMapping("")
+	public ResponseEntity<?> update(@RequestBody @Valid Book book) {
+
+		return ResponseEntity.ok(bookService.update(book));
+	}
+
 	@GetMapping()
 	public ResponseEntity<?> findAll() {
 		return ResponseEntity.ok(bookService.findAll());
@@ -44,14 +58,6 @@ public class BookController {
 
 
 		return ResponseEntity.ok(dto);
-	}
-
-	@PutMapping("")
-	public ResponseEntity<?> update(@RequestBody
-//										@Valid
-										Book book) {
-
-		return ResponseEntity.ok(bookService.update(book));
 	}
 
 	@DeleteMapping("/{id}")
