@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.global.book.entity.Author;
 
 @Repository
-public interface AuthorRepo extends MongoRepository<Author, String> {
+public interface AuthorRepo extends MongoRepository<Author, String>  {
 	
-	@Query(value= "{email:'?0'}" , fields="{'email' : 1}")
+	@Query(value= "{email:'?0'}" , fields="{'email' : 1 ,'name' : 1}")  // fields="{'email' : 1 ,'name' : 1}" projection
 	Author findAuthorByEmail (String email);
 
 }

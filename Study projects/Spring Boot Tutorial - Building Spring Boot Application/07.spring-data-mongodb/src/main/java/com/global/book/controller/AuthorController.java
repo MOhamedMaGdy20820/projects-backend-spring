@@ -27,7 +27,6 @@ public class AuthorController {
 	private AuthorService autherService;
 
 	public AuthorController(AuthorService autherService) {
-		super();
 		this.autherService = autherService;
 	}
 
