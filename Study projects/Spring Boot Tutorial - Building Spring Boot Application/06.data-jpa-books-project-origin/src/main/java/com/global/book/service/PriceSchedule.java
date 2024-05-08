@@ -17,20 +17,20 @@ public class PriceSchedule {
 	@Async
 	public void computePrice () throws InterruptedException {
 	
-		Thread.sleep(4000);
+	//	Thread.sleep(4000);
 		
 		log.info("compute price >> " + LocalDateTime.now());
 	}
 	
-	
-	@Scheduled(fixedRate = 200000)
-//	@SchedulerLock(name = "bookComputeDiscount")
-	@Async
-	public void computeDiscount () throws InterruptedException {
-	
-		Thread.sleep(4000);
-		
-		log.info("compute discount >> " + LocalDateTime.now());
-	}
+//
+//	@Scheduled(fixedRate = 200000)
+////	@SchedulerLock(name = "bookComputeDiscount")
+//	@Async
+//	public void computeDiscount () throws InterruptedException {
+//
+//		Thread.sleep(4000);
+//
+//		log.info("compute discount >> " + LocalDateTime.now());
+//	}
 
 }

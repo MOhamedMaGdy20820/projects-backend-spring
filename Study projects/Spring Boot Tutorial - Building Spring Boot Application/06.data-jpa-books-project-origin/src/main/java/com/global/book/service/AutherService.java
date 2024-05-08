@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class AutherService extends BaseService<Auther, Long> {
+public class  AutherService extends BaseService<Auther, Long> {
 
 	private final AutherRepo autherRepo;
 	
