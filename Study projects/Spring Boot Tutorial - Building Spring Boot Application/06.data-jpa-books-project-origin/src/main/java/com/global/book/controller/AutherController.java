@@ -52,8 +52,7 @@ public class AutherController {
 
 	@Operation(summary = "Get a book by its id")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Found the book", content = {
-					@Content(mediaType = "application/json", schema = @Schema(implementation = Book.class)) }),
+			@ApiResponse(responseCode = "200", description = "Found the book", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Book.class)) }),
 			@ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
 			@ApiResponse(responseCode = "404", description = "Book not found", content = @Content) })
 	@GetMapping("/{id}")

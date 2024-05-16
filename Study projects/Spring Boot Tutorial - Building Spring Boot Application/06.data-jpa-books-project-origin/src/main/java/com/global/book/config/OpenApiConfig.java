@@ -18,36 +18,35 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 @OpenAPIDefinition()
-public class OpenApiConfig {
-	
-	private static final String SECURITY_SCHEME_NAME = "Bearer oAuth Token";
-	
-	@Bean
-	public OpenAPI customOpenAPI(@Value("${application-description}") String appDesciption, 
-                                 @Value("${application-version}")  String appVersion) {
-		return new OpenAPI()
-				.info(new Info()
-						.title("sample application API")
-				.version(appVersion)
-				.contact(getContact())
-				.description(appDesciption)
-				.termsOfService("http://swagger.io/terms/")
-				.license(getLicense()))
-						 
-				.addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME, Arrays.asList("read", "write")))
-				.components(
-						new Components()
-						.addSecuritySchemes(SECURITY_SCHEME_NAME,
-								new SecurityScheme().name(SECURITY_SCHEME_NAME)
-								.type(SecurityScheme.Type.HTTP)
-								.scheme("bearer")
-								.bearerFormat("JWT")
-							)) ;
-	}
-	
-	
-	
-	 private Contact getContact() {
+public class OpenApiConfig {  // swagger
+
+    private static final String SECURITY_SCHEME_NAME = "Bearer oAuth Token";
+
+    @Bean
+    public OpenAPI customOpenAPI(@Value("${application-description}") String appDesciption,
+                                 @Value("${application-version}") String appVersion) {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("sample application API")
+                        .version(appVersion)
+                        .contact(getContact())
+                        .description(appDesciption)
+                        .termsOfService("http://swagger.io/terms/")
+                        .license(getLicense()))
+
+                .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME, Arrays.asList("read", "write")))
+                .components(
+                        new Components()
+                                .addSecuritySchemes(SECURITY_SCHEME_NAME,
+                                        new SecurityScheme().name(SECURITY_SCHEME_NAME)
+                                                .type(SecurityScheme.Type.HTTP)
+                                                .scheme("bearer")
+                                                .bearerFormat("JWT")
+                                ));
+    }
+
+
+    private Contact getContact() {
         Contact contact = new Contact();
         contact.setEmail("info@gmail.com");
         contact.setName("book Service");
@@ -55,7 +54,7 @@ public class OpenApiConfig {
         contact.setExtensions(Collections.emptyMap());
         return contact;
     }
-    
+
     private License getLicense() {
         License license = new License();
         license.setName("Apache License, Version 2.0");
