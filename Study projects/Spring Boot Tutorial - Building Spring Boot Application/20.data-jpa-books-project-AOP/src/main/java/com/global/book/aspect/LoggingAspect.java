@@ -1,17 +1,11 @@
 package com.global.book.aspect;
 
 
-import org.apache.commons.lang3.StringUtils;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+import org.aspectj.lang.*;
+import org.aspectj.lang.annotation.*;
+import org.slf4j.*;
+import org.springframework.core.annotation.*;
+import org.springframework.stereotype.*;
 
 @Aspect
 @Order(1)
@@ -33,17 +27,21 @@ public class LoggingAspect {
 	
 	@Pointcut(value = "forRepositoryLog() || forServiceLog() || forControllerLog()")
 	public void forAllApp() {}
-
-
+	
 	@Before(value = "forAllApp()")
 	public void beforMethod(JoinPoint joinPoint) {
 
 		String methodName = joinPoint.getSignature().toShortString();
+
 		log.info("====>  Method Name is >> {}" , methodName );
+
 		Object [] args = joinPoint.getArgs();
+
 		for (Object arg : args) {
+
 			log.info("===> argument >> {}" , arg);
 		}
+
 	}
 
 }
