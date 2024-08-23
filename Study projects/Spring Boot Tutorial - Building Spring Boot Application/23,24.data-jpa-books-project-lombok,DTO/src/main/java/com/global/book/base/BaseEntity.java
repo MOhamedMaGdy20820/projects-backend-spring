@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @MappedSuperclass // not normal class not entity
 @EntityListeners({AuditingEntityListener.class}) // jpa auditing @CreatedBy, @CreatedDate, @LastModifiedBy, @LastModifiedDate
+
                         // any dataType
 public abstract class BaseEntity <ID> {
 
@@ -21,14 +22,6 @@ public abstract class BaseEntity <ID> {
     private ID id;
 
     private String statusCode;
-
-    public String getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
 
     @CreatedBy
     private String createdBy;
@@ -41,6 +34,15 @@ public abstract class BaseEntity <ID> {
 
     @LastModifiedDate
     private Date lastModifiedDate;
+
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
 
     public ID getId() {
         return id;

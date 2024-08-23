@@ -24,7 +24,8 @@ public class BookDto extends BaseDto<Long> {
 	private String name ;
 
 	@Min(value = 5)
-	@Max(value = 5000)
+	@Max(value = 5000 )
+
 	private double price;
 
 	@NotNull

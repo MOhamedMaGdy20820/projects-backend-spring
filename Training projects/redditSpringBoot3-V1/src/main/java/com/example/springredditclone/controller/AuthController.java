@@ -60,11 +60,6 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body("Refresh Token Deleted Successfully!!");
     }
 
-
-
-
-
-
     @GetMapping ("/get")
     public User getUser(@RequestParam long id){
         return userRepository.findById(id).orElse(null);
@@ -74,6 +69,7 @@ public class AuthController {
     public void deleteAll(){
         verificationTokenRepository.deleteAll();
     }
+
     @DeleteMapping  ("/deleteUsers")
     public void deleteUsers(){
         userRepository.deleteAll();
