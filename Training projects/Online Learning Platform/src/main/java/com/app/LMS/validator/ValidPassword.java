@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface ValidPassword {
 
-    String message() default "not valid";
+    String message() default "Passwords must meet security standards, have a minimum length of 8 and include special characters.";
 
     Class<?>[] groups() default { };
 

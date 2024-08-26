@@ -8,4 +8,8 @@ public class CustomException extends RuntimeException {
     public CustomException(String exMessage) {
         super(exMessage);
     }
+
+    public CustomException() {
+        super();
+    }
 }

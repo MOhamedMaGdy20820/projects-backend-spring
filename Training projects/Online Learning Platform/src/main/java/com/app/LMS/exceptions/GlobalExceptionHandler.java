@@ -1,13 +1,9 @@
-package com.global.book.error;
-
-import com.global.book.error.ErrorResponse;
-
+package com.app.LMS.exceptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,37 +17,24 @@ import java.util.Arrays;
 import java.util.List;
 
 @ControllerAdvice
-public class GlobalExecptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(RecoredNotFoundExecption.class)
-    public ResponseEntity<?> handleRecoredNotFound(RecoredNotFoundExecption ex) {
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<?> handleRecoredNotFound(CustomException ex) {
 
         ErrorResponse error =
-                new ErrorResponse(ex.getLocalizedMessage(), Arrays.asList(ex.getMessage())); // message response
-
+              //  new ErrorResponse(ex.getLocalizedMessage(), Arrays.asList(ex.getMessage())); // message response
+                new ErrorResponse( Arrays.asList(ex.getMessage()));
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(error);
+                .body(error);  // body of exception
     }
-
-
-    @ExceptionHandler(DaplicateRecoredException.class)
-    public ResponseEntity<?> handleDaplicateRecoredException(DaplicateRecoredException ex) {
-
-        ErrorResponse error = new ErrorResponse(ex.getLocalizedMessage(), Arrays.asList(ex.getMessage()));
-
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(error);
-    }
-
 
     // array of exceptions
-
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        
+
         List<String> errors = new ArrayList<String>();
 
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
@@ -61,7 +44,9 @@ public class GlobalExecptionHandler extends ResponseEntityExceptionHandler {
             errors.add(error.getDefaultMessage());
         }
 
-        ErrorResponse error = new ErrorResponse(ex.toString(), errors);
+      //  ErrorResponse error = new ErrorResponse(ex.toString(), errors);
+        ErrorResponse error = new ErrorResponse(errors);
+
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
