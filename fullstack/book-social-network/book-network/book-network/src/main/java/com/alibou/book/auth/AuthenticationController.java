@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 
 @Tag(name = "Authentication") // جميع الـ endpoints التي تحتوي على هذا التصنيف ستظهر تحت هذا القسم في توثيق Swagger، مما يعني أنها مرتبطة بعملية المصادقة (Authentication).
+
 public class AuthenticationController {
 
     private final AuthenticationService service;
@@ -41,10 +42,8 @@ public class AuthenticationController {
         service.activateAccount(token);
     }
 
-
-
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request) {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
