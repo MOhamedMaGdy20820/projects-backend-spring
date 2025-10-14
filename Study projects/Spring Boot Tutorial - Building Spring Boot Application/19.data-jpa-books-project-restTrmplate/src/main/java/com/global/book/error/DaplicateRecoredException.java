@@ -1,6 +1,6 @@
 package com.global.book.error;
 
-public class DaplicateRecoredException extends RuntimeException {
+public class  DaplicateRecoredException extends RuntimeException {
 
 	public DaplicateRecoredException() {
 		super();

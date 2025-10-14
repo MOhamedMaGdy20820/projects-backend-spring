@@ -55,8 +55,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long>{
 
 	@Query(value = "select (select count(*) from hr_departments) deptCount,"
 		    	+        " (select count(*) from actor) empCount,"
-			    +        " (select count(*) from sec_users ) userCount"
-			                                                                    , nativeQuery = true)
+			    +        " (select count(*) from sec_users ) userCount", nativeQuery = true)
 	HRStatisticProjection getHRStatistic ();
 	
 	
